@@ -191,12 +191,6 @@
 (use-package lua-mode
   :ensure t)
 
-(use-package eglot-booster
-  :vc (:url "https://github.com/jdtsmith/eglot-booster")
-  :ensure t
-  :after eglot
-  :config (eglot-booster-mode))
-
 (use-package repeat
   :config
   (setq set-mark-command-repeat-pop t)
@@ -271,3 +265,29 @@
 
 (setq tab-bar-format '(tab-bar-format-tabs-groups))
 
+(use-package wgrep
+  :ensure t)
+(require 'wgrep)
+
+(use-package eglot
+  :ensure t
+  :defer t
+  :hook ((python-mode . eglot-ensure)
+         (go-mode . eglot-ensure)
+         (go-ts-mode . eglot-ensure)
+         (python-ts-mode . eglot-ensure))
+  :custom
+  (eglot-report-progress nil)  ; Prevent minibuffer spam
+
+  :config
+  (fset #'jsonrpc--log-event #'ignore)
+  (setq jsonrpc-event-hook nil)
+  (add-to-list 'eglot-server-programs
+               `(python-mode
+                 . ,(eglot-alternatives '(("pyright-langserver" "--stdio"))))))
+
+(use-package eglot-booster
+  :vc (:url "https://github.com/jdtsmith/eglot-booster")
+  :ensure t
+  :after eglot
+  :config (eglot-booster-mode))
