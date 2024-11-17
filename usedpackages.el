@@ -1,42 +1,27 @@
 (use-package diff-hl
-  :ensure t
+  
   :hook (prog-mode . diff-hl-mode))
-(use-package rainbow-delimiters
-  :ensure t)
-(use-package eat
-  :ensure t)
-(use-package ace-window
-  :ensure t)
-(use-package blamer
-  :ensure t)
-(use-package org-ac
-  :ensure t)
-(use-package org-bullets
-  :ensure t)
-(use-package gruvbox-theme
-  :ensure t)
-(use-package posframe
-  :ensure t)
-(use-package markdown-mode
-  :ensure t)
-(use-package go-autocomplete
-  :ensure t)
-(use-package mark-multiple
-  :ensure t)
-(use-package move-text
-  :ensure t)
+(use-package rainbow-delimiters)
+(use-package eat)
+(use-package ace-window)
+(use-package blamer)
+(use-package org-ac)
+(use-package org-bullets)
+(use-package gruvbox-theme)
+(use-package posframe)
+(use-package markdown-mode)
+(use-package go-autocomplete)
+(use-package mark-multiple)
+(use-package move-text)
 (use-package all-the-icons
-  :ensure t
+  
   :if (display-graphic-p))
-(use-package elfeed
-  :ensure t)
-(use-package package-lint
-  :ensure t)
-(use-package yasnippet-snippets
-  :ensure t)
+(use-package elfeed)
+(use-package package-lint)
+(use-package yasnippet-snippets)
 
 (use-package which-key
-  :ensure t
+  
   :config
   (setq which-key-idle-delay 0.3)
   (setq which-key-use-C-h-commands nil)
@@ -44,7 +29,7 @@
   (which-key-mode t))
 
 (use-package beacon
-  :ensure t
+  
   :config
   (beacon-mode t)
   (setq beacon-color "red")
@@ -52,16 +37,16 @@
   (setq beacon-blink-duration 0.1))
 
 (use-package nyan-mode
-  :ensure t
+  
   :config
   (nyan-mode t))
 
 (use-package json-mode
-  :ensure t
+  
   :mode "\\.json\\'")
 
 (use-package consult-yasnippet
-  :ensure t
+  
   :bind (("C-c y i" . consult-yasnippet)))
 
 (use-package mwheel
@@ -72,15 +57,15 @@
   (mouse-wheel-flip-direction t))
 
 (use-package docker-compose-mode
-  :ensure t
+  
   :mode "docker-compose.*\.yml\\'")
 
 (use-package dockerfile-mode
-  :ensure t
+  
   :mode "Dockerfile[a-zA-Z.-]*\\'")
 
 (use-package emojify
-  :ensure t
+  
   :after erc
   :defer 15
   :config
@@ -90,7 +75,7 @@
   :bind ("C-c v" . ffap))
   
 (use-package yasnippet
-  :ensure t
+  
   :demand t
   :diminish yas-minor-mode
   :bind (("C-c y d" . yas-load-directory)
@@ -110,12 +95,12 @@
   (yas-global-mode 1))
 
 (use-package magit
-  :ensure t
+  
   :bind (("C-x g" . magit-status)
          ("C-x G" . magit-status-with-prefix)))
 
 (use-package consult
-  :ensure t
+  
   :demand t
   :bind (("C-s" . consult-line)
          ("C-M-l" . consult-imenu)
@@ -131,12 +116,12 @@
             (car (project-roots project))))))
 
 (use-package marginalia
-  :ensure t
+  
   :init
   (marginalia-mode))
 
 (use-package vertico
-  :ensure t
+  
   :init
   (vertico-mode)
   (setq vertico-cycle t))
@@ -147,11 +132,11 @@
   :init (vertico-mouse-mode))
 
 (use-package orderless
-  :ensure t
+  
   :custom (completion-styles '(orderless)))
 
 (use-package embark
-  :ensure t
+  
   :bind
   (("C-." . embark-act)
    ("C-;" . embark-dwim))        ;; good alternative: M-.
@@ -165,7 +150,7 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  :ensure t
+  
   :after (:all embark consult)
   :demand t
   ;; if you want to have consult previews as you move around an
@@ -174,7 +159,7 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package dired-subtree
-  :ensure t
+  
   :bind
   (:map dired-mode-map
         ("TAB" . dired-subtree-toggle)))
@@ -183,13 +168,12 @@
 
 ;; Programming languages
 (use-package go-mode
-  :ensure t
+  
   :bind (("C-c C-k" . go-run-this-file)
   ("C-c C-c" . go-compile))
   :hook ((before-save . eglot-format-buffer)))
 
-(use-package lua-mode
-  :ensure t)
+(use-package lua-mode)
 
 (use-package repeat
   :config
@@ -210,29 +194,7 @@
       map))
 
   (dolist (cmd '(isearch-repeat-backward))
-    (put cmd 'repeat-map 'isearch-repeat-map))
-
-  (defvar buffer-navigation-map
-    (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "p") #'backward-paragraph)
-      (define-key map (kbd "n") #'forward-paragraph)
-      (define-key map (kbd "f") #'forward-char)
-      (define-key map (kbd "b") #'backward-char)
-      map))
-
-  (dolist (cmd '(forward-paragraph backward-paragraph forward-char backward-char))
-    (put cmd 'repeat-map 'buffer-navigation-map))
-
-  (defvar paragraph-navigation-map
-    (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "n") #'next-line)
-      (define-key map (kbd "p") #'previous-line)
-      (define-key map (kbd "f") #'forward-word)
-      (define-key map (kbd "b") #'backward-word)
-      map))
-  
-  (dolist (cmd '(next-line previous-line forward-word backward-word))
-    (put cmd 'repeat-map 'paragraph-navigation-map)))
+    (put cmd 'repeat-map 'isearch-repeat-map)))
 
 (use-package switchy-window
   :bind (("C-x o" . switchy-window))
@@ -265,12 +227,11 @@
 
 (setq tab-bar-format '(tab-bar-format-tabs-groups))
 
-(use-package wgrep
-  :ensure t)
+(use-package wgrep)
 (require 'wgrep)
 
 (use-package eglot
-  :ensure t
+  
   :defer t
   :hook ((python-mode . eglot-ensure)
          (go-mode . eglot-ensure)
@@ -288,6 +249,6 @@
 
 (use-package eglot-booster
   :vc (:url "https://github.com/jdtsmith/eglot-booster")
-  :ensure t
+  
   :after eglot
   :config (eglot-booster-mode))
